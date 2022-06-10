@@ -14,6 +14,7 @@ namespace Bank
         string path = "data.json";
         public MainWindow()
         {
+            RefreshData();
             repository = JsonConvert.DeserializeObject<Repository>(File.ReadAllText(path), new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.Auto
