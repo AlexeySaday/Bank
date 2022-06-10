@@ -14,11 +14,17 @@ namespace Bank
         string path = "data.json";
         public MainWindow()
         {
-            RefreshData();
-            repository = JsonConvert.DeserializeObject<Repository>(File.ReadAllText(path), new JsonSerializerSettings
+            try
+            { 
+                repository = JsonConvert.DeserializeObject<Repository>(File.ReadAllText(path), new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.Auto
+                });
+            }
+            catch(FileNotFoundException)
             {
-                TypeNameHandling = TypeNameHandling.Auto
-            });
+                RefreshData();
+            }
             InitializeComponent();
             loglist.ItemsSource = repository.Clients;
         }
